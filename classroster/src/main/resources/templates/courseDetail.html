@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row m-4">
+        <div class="col text-center border border-dark">
+            <h1><a href="/" class="text-dark">Course Manager</a></h1>
+        </div>
+    </div>
+    <div class="row m-4 border border-dark">
+        <div class="col text-center m-3">
+            <a href="teachers" class="btn btn-outline-primary btn-lg">Teachers</a>
+        </div>
+        <div class="col text-center m-3">
+            <a href="students" class="btn btn-outline-primary btn-lg">Students</a>
+        </div>
+        <div class="col text-center m-3">
+            <a href="courses" class="btn btn-outline-primary btn-lg">Courses</a>
+        </div>
+    </div>
+
+    <div class="row m-4 border border-dark">
+        <div class="col-3 text-center m-3">
+            <span class="h3">Course Details</span>
+        </div>
+        <div class="col-7 m-3">
+            <div class="form-group row">
+                <label class="col-3 col-form-label">Name:</label>
+                <div class="col-9">
+                    <p class="form-control-static" th:text="${course.name}">Course Name</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label">Description:</label>
+                <div class="col-9">
+                    <p class="form-control-static" th:text="${course.description}">Course Description</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label">Teacher:</label>
+                <div class="col-9">
+                    <p class="form-control-static" th:text="${course.teacher.firstName + ' ' + course.teacher.lastName}">Teacher Name</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label">Students:</label>
+                <div class="col-9">
+                    <ul class="list-unstyled">
+                        <li th:each="student : ${course.students}" th:text="${student.firstName + ' ' + student.lastName}">Student Name</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-9 offset-3">
+                    <a th:href="@{/editCourse(id=${course.id})}" class="btn btn-primary">Edit Course</a>
+                    <a th:href="@{/deleteCourse(id=${course.id})}" class="btn btn-danger" 
+                       onclick="return confirm('Are you sure you want to delete this course?')">Delete Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html> 
